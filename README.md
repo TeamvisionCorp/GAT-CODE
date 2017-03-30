@@ -1,4 +1,6 @@
 #GAT_Maven_Public
+GAT是一个数据驱动，代码，用例，数据相互分离的接口以及web ui自动化框架。
+
 GATCore:最新版本：2.0.4
 gatesideLib最新版本：2.0.5
 Gattme最新版本：2.0.9
