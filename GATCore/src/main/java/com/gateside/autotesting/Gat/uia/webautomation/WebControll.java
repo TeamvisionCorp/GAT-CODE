@@ -47,8 +47,7 @@ public class WebControll {
     	}
     	else
     	{
-    		uiControll=(WebUIControll) ClassReflector.createInstance(GlobalConfig.getStepMethodJarPath(),GlobalConfig.getWebControllDefaultPackage()+
-        			uiElementInfo.ControlType, parameters);
+    		uiControll=(WebUIControll) ClassReflector.createInstance(GlobalConfig.getStepMethodJarPath(),uiElementInfo.ControlType, parameters);
 		}
     	return uiControll;
     }
