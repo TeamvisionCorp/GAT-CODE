@@ -25,7 +25,7 @@ Gattme最新版本：2.0.9
        <Step StepName="Step1" StepParameterID="Test01" StepParametersFilePath="Rest_RegisterwithInviteCodeParameters.xml"/>
        <Step StepName="Step2" StepParameterID="Test04"/>
     </TestCase>
-  </AllTestCases>
+    </AllTestCases>
 
   GATCore 2.0.5  新功能
 
