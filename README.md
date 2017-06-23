@@ -1,16 +1,20 @@
 #GAT_Maven_Public
 GAT是一个数据驱动，代码，用例，数据相互分离的接口以及web ui自动化框架。
 
-GATCore:最新版本：2.0.5
+GATCore:最新版本：2.0.6
 gatesideLib最新版本：2.0.5
 Gattme最新版本：2.0.9
 
 
-1  GATCore 2.0.5  新功能
+  GATCore 2.0.6  新功能
+
+    1  修复属性值不能包含/的bug。 /做为xml的特定符号，不能包含在属性值中。请使用|来代替属性值中的/
+
+  GATCore 2.0.5  新功能
 
     1  修复不能加载自定义UIControll的bug
     
-2  GATCore 2.0.4 新功能
+  GATCore 2.0.4 新功能
     
     1  支持在DataFiles/xmls 文件夹中通过新建子文件夹方式管理TestCase文件，以及Parameters文件
     
