@@ -19,8 +19,8 @@ Gattme最新版本：2.0.9
     <StepParametersFilePath>Rest/fdsfds/RegisterwithInviteCodeParameters.xml</StepParametersFilePath>
     <StepAssembly>com.baidu.gameqa.iat.steps.member.</StepAssembly>
     <StepGroup>RegisterwithInviteCode</StepGroup>
-    <InterfaceID>RegisterwithInviteCode</InterfaceID>
-    <ModuleID>RegisterwithInviteCode</ModuleID>
+    <InterfaceID>1</InterfaceID> //ID接口在API管理系统中的ID
+    <ModuleID>2</ModuleID> //项目模块ID
      <TestCase ID="Test01" Name="RegisterGameUser_success" CaseTags="BVT,EDU">
        <Step StepName="Step1" StepParameterID="Test01" StepParametersFilePath="Rest_RegisterwithInviteCodeParameters.xml"/>
        <Step StepName="Step2" StepParameterID="Test04"/>
