@@ -1,16 +1,37 @@
 #GAT_Maven_Public
 GAT是一个数据驱动，代码，用例，数据相互分离的接口以及web ui自动化框架。
 
-GATCore:最新版本：2.0.5
+GATCore:最新版本：2.0.6
 gatesideLib最新版本：2.0.5
 Gattme最新版本：2.0.9
 
 
-1  GATCore 2.0.5  新功能
+  GATCore 2.0.6  新功能
+
+    1  修复属性值不能包含/的bug。 /做为xml的特定符号，不能包含在属性值中。请使用_来代替属性值中的/
+    2  新增用例模块属性ModuleID,可以作为用例的属性。目的是为了更好的管理用例，以及执行用例过滤等
+    3  新增用例标签属性CaseTags 可以作为用例属性。可以更好的通过CaseTags中的标签来过滤要执行的用例
+    4  为多步骤接口用例增加InterfaceID,以便于将用例和接口相关联。通过过滤仅执行某个接口的相关用例。具体配置如下。
+    5  对于上述新增的ModuleID,InterfaceID提供统一的全局配置。在单个用例为提供该属性时，默认以全局配置代替。
+    
+    
+     <AllTestCases>
+    <StepParametersFilePath>Rest/fdsfds/RegisterwithInviteCodeParameters.xml</StepParametersFilePath>
+    <StepAssembly>com.baidu.gameqa.iat.steps.member.</StepAssembly>
+    <StepGroup>RegisterwithInviteCode</StepGroup>
+    <InterfaceID>RegisterwithInviteCode</InterfaceID>
+    <ModuleID>RegisterwithInviteCode</ModuleID>
+     <TestCase ID="Test01" Name="RegisterGameUser_success" CaseTags="BVT,EDU">
+       <Step StepName="Step1" StepParameterID="Test01" StepParametersFilePath="Rest_RegisterwithInviteCodeParameters.xml"/>
+       <Step StepName="Step2" StepParameterID="Test04"/>
+    </TestCase>
+    </AllTestCases>
+
+  GATCore 2.0.5  新功能
 
     1  修复不能加载自定义UIControll的bug
     
-2  GATCore 2.0.4 新功能
+  GATCore 2.0.4 新功能
     
     1  支持在DataFiles/xmls 文件夹中通过新建子文件夹方式管理TestCase文件，以及Parameters文件
     
