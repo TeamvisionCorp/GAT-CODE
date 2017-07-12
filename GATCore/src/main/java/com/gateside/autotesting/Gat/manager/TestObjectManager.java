@@ -1,5 +1,8 @@
 package com.gateside.autotesting.Gat.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.dom4j.Element;
 
 import com.gateside.autotesting.Gat.manager.IManager;
@@ -22,6 +25,13 @@ public abstract class TestObjectManager implements IManager
 		if (XMLElement==null) throw new Exception("TestObject with id "+elementID+" can not be found");
 		return XMLElement.asXML();
 	}
+	
+	protected List<Element> getTestObjectXMLs(String xmlFilePath,String elementXpath) throws Exception
+	{
+		List<Element> XMLElements=XMLParser.getElementsByXPath(xmlFilePath, elementXpath);
+		return XMLElements;
+	}
+	
 	
 
 }

@@ -1,6 +1,13 @@
 package com.gateside.autotesting.Gat.manager;
 
 import com.gateside.autotesting.Gat.manager.StepsCaseManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.dom4j.Element;
+
+import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.TestStep;
 import com.gateside.autotesting.Gat.dataobject.testcase.WebUIStepsCase;
@@ -26,12 +33,28 @@ public class WebUIStepsCaseManager extends StepsCaseManager
 		return caseResult;
 	}
 	
+	@Override
+	public List<StepsCase> getAllTestCase(String filePath) throws Exception {
+		List<StepsCase> result=new ArrayList<StepsCase>();
+		String testCaseXPth="AllTestCases/TestCase";
+		List<Element> caseXMLElement=this.getTestObjectXMLs(filePath, testCaseXPth);
+		for(Element item:caseXMLElement)
+		{
+			WebUIStepsCase caseResult=new WebUIStepsCase();
+			caseResult=(WebUIStepsCase)XMLSerializer.XMLToObject(caseResult,item.asXML());
+			caseResult=formatTestCase(caseResult, filePath);
+			result.add(caseResult);
+		}
+		return result;
+	}
+	
 	private WebUIStepsCase formatTestCase(WebUIStepsCase testCase,String filePath)
 	{
 	    resetAssembly(testCase,filePath);
 	    resetGroup(testCase,filePath);
 	    resetParametersFilePath(testCase,filePath);
 	    resetUIElementsFilePath(testCase, filePath);
+	    resetTestCaseModuleID(testCase, filePath);
 		return testCase;
 	}
 	
@@ -46,6 +69,8 @@ public class WebUIStepsCaseManager extends StepsCaseManager
 			}
 		}
 	}
+	
+	
 	
 	private void resetGroup(WebUIStepsCase testCase,String filePath)
 	{
@@ -75,6 +100,7 @@ public class WebUIStepsCaseManager extends StepsCaseManager
 					step.StepParametersFilePath=XMLParser.getElementsByXPath(filePath, parameterFilePath).get(0).getTextTrim();
 				}
 			}
+			this.transforSpecialChar(step);
 		}
 	}
 	

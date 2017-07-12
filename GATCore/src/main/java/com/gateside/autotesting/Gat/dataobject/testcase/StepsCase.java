@@ -26,6 +26,12 @@ public class StepsCase extends TestObject
 	@Attribute(name="StepParametersFilePath",required=false)
 	public String StepParametersFilePath;
 	
+	@Attribute(name="StepAssembly",required=false)
+	public String StepAssembly;
+	
+	@Attribute(name="StepGroup",required=false)
+	public String StepGroup;
+	
 	@Attribute(name="SetupType",required=false)
 	public EnumSetupType SetupType;
 	   
@@ -40,6 +46,13 @@ public class StepsCase extends TestObject
 	
 	@Attribute(name="StepModule",required=false)
 	public Boolean StepModule=false;
+	
+	@Attribute(name="ModuleID",required=false)
+	public String ModuleID="";
+
+	
+	@Attribute(name="CaseTags",required=false)
+	public String CaseTags="";
 	
 	
 	

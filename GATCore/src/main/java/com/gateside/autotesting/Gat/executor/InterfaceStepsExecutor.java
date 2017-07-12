@@ -85,6 +85,11 @@ public class InterfaceStepsExecutor extends StepsExecutor
 		this.setGlobalConfig();
 		for(InterfaceTestStep step : ((InterfaceStepsCase)targetCase).Steps)
 		{
+			
+			SimpleLogger.logInfo(this.getClass(),"Step case interface id is "+((InterfaceStepsCase)targetCase).InterfaceID);
+			SimpleLogger.logInfo(this.getClass(),"Step case interface module id is "+targetCase.ModuleID);
+			SimpleLogger.logInfo(this.getClass(),"Step case tags id are "+targetCase.CaseTags);
+			
 			if(!step.SetUp && !step.TearDown)
 			{
 				GlobalConfig.setStepsParameterFilePath(GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.StepParametersFilePath); //set glocal config for pre step parameters
