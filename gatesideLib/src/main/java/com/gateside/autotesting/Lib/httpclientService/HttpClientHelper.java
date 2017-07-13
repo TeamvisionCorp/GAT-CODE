@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -14,10 +15,14 @@ import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -58,11 +63,207 @@ public class HttpClientHelper
 	   
    }
    
+ 
    public static void cleanContext()
    {
 	   HttpClientHelper.context=null;
 	   HttpClientHelper.httpClient=null;
    }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse postJson(String apiUri,String json) throws Exception, IOException
+   {
+	    return HttpClientHelper.postJson(apiUri, json,null);
+   }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @param headers
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse postJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   {
+	    HttpClientHelper.createClient();
+	    HttpClientHelper.createContext();
+	    HttpPost httPost = new HttpPost(apiUri);
+	    if(headers!=null)
+	    {
+	    	httPost.setHeaders(headers);
+	    }
+	    httPost.addHeader("Content-type","application/json; charset=utf-8");  
+	    httPost.setHeader("Accept", "application/json");  
+	    httPost.setEntity(new StringEntity(json, Charset.forName("UTF-8"))); 
+	    CloseableHttpResponse response = httpClient.execute(httPost,context);
+	    return response;
+   }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse putJson(String apiUri,String json) throws Exception, IOException
+   {
+	    return HttpClientHelper.putJson(apiUri, json,null);
+   }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @param headers
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse putJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   {
+	    HttpClientHelper.createClient();
+	    HttpClientHelper.createContext();
+	    HttpPut httpPut = new HttpPut(apiUri);
+	    if(headers!=null)
+	    {
+	    	httpPut.setHeaders(headers);
+	    }
+	    httpPut.addHeader("Content-type","application/json; charset=utf-8");  
+	    httpPut.setHeader("Accept", "application/json");  
+	    httpPut.setEntity(new StringEntity(json, Charset.forName("UTF-8"))); 
+	    CloseableHttpResponse response = httpClient.execute(httpPut,context);
+	    return response;
+   }
+   
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse patchJson(String apiUri,String json) throws Exception, IOException
+   {
+	    return HttpClientHelper.patchJson(apiUri, json,null);
+   }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @param headers
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse patchJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   {
+	    HttpClientHelper.createClient();
+	    HttpClientHelper.createContext();
+	    HttpPatch httpPatch = new HttpPatch(apiUri);
+	    if(headers!=null)
+	    {
+	    	httpPatch.setHeaders(headers);
+	    }
+	    httpPatch.addHeader("Content-type","application/json; charset=utf-8");  
+	    httpPatch.setHeader("Accept", "application/json");  
+	    httpPatch.setEntity(new StringEntity(json, Charset.forName("UTF-8"))); 
+	    CloseableHttpResponse response = httpClient.execute(httpPatch,context);
+	    return response;
+   }
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse deleteJson(String apiUri,String json) throws Exception, IOException
+   {
+	    return HttpClientHelper.deleteJson(apiUri, json,null);
+   }
+   
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @param headers
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse deleteJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   {
+	    HttpClientHelper.createClient();
+	    HttpClientHelper.createContext();
+	    HttpDelete httpDelete = new HttpDelete(apiUri);
+	    if(headers!=null)
+	    {
+	    	httpDelete.setHeaders(headers);
+	    }
+	    CloseableHttpResponse response = httpClient.execute(httpDelete,context);
+	    return response;
+   }
+   
+ 
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse getJson(String apiUri) throws Exception, IOException
+   {
+	    return HttpClientHelper.getJson(apiUri,null);
+   }
+   
+   
+   /**
+    * 
+    * @param apiUri
+    * @param json
+    * @param headers
+    * @return
+    * @throws Exception
+    * @throws IOException
+    */
+   public static CloseableHttpResponse getJson(String apiUri,Header[] headers) throws Exception, IOException
+   {
+	    HttpClientHelper.createClient();
+	    HttpClientHelper.createContext();
+	    HttpGet httpGet = new HttpGet(apiUri);
+	    if(headers!=null)
+	    {
+	    	httpGet.setHeaders(headers);
+	    }
+	    CloseableHttpResponse response = httpClient.execute(httpGet,context);
+	    return response;
+   }
+   
+ 
+   
+   
+   
+   
    
    
    
@@ -75,6 +276,26 @@ public class HttpClientHelper
    {
 	   return context.getRedirectLocations();
    }
+   
+   /**
+    * 
+    * @param response  CloseableHttpResponse
+    * @return String
+    * @throws Exception ex
+    */
+   public static String getResponseText(CloseableHttpResponse response) throws Exception
+   {
+	    StringBuilder textView=new StringBuilder();
+	    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent())); 
+	    String line = "";
+	    while ((line = rd.readLine()) != null) 
+	    {
+	    	textView.append(line);
+	    } 
+      response.close();
+      return textView.toString();
+   }
+   
    
    /**
     * 
@@ -149,8 +370,8 @@ public class HttpClientHelper
    {
 	    HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
-	    HttpPost httpGet = new HttpPost(url);
-	    CloseableHttpResponse response = httpClient.execute(httpGet,context);
+	    HttpPost httPost = new HttpPost(url);
+	    CloseableHttpResponse response = httpClient.execute(httPost,context);
 	    return response;
    }
    
@@ -171,24 +392,6 @@ public class HttpClientHelper
 	   }
    }
    
-   /**
-    * 
-    * @param response  CloseableHttpResponse
-    * @return String
-    * @throws Exception ex
-    */
-   private static String getResponseText(CloseableHttpResponse response) throws Exception
-   {
-	    StringBuilder textView=new StringBuilder();
-	    BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent())); 
-	    String line = "";
-	    while ((line = rd.readLine()) != null) 
-	    {
-	    	textView.append(line);
-	    } 
-      response.close();
-      return textView.toString();
-   }
    
    
 }

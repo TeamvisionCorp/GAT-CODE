@@ -107,6 +107,12 @@ public static String getPreStepResult() {
 }
 
 
+public static String apiHost()
+{
+	return ConfigReader.GetValue("gatConfig.properties", "apiHost");	
+}
+
+
 
 
 

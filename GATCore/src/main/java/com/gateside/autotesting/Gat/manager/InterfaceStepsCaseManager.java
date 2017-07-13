@@ -125,7 +125,10 @@ public class InterfaceStepsCaseManager extends StepsCaseManager
 					step.StepParametersFilePath=XMLParser.getElementsByXPath(filePath, parameterFilePath).get(0).getTextTrim();
 				}
 			}
-			this.transforSpecialChar(step);
+			else
+			{
+				this.transforSpecialChar(step);	
+			}
 		}
 	}
 

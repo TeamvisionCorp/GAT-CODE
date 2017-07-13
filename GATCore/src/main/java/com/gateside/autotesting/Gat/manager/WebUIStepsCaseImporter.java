@@ -34,10 +34,5 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	}
 
 
-	@Override
-	public String toJsonString(TestObject testObject,Integer objectType) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

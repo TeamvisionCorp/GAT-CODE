@@ -11,5 +11,4 @@ public abstract class TestObjectImporter
 	
 	public abstract List<String> getFilePath(String rootDir) throws Exception;
 	
-	public abstract String 	toJsonString(TestObject testObject,Integer objectType) throws Exception;
 }
