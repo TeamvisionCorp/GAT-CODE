@@ -72,27 +72,25 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse postJson(String apiUri,String json) throws Exception, IOException
+   public static CloseableHttpResponse postJson(String apiUri,String json) throws Exception
    {
 	    return HttpClientHelper.postJson(apiUri, json,null);
    }
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @param headers
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @param headers http headers
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse postJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   public static CloseableHttpResponse postJson(String apiUri,String json,Header[] headers) throws Exception
    {
 	    HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
@@ -110,27 +108,25 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @return
-    * @throws Exception
-    * @throws IOException
+   * @param apiUri  restapi url
+    * @param json post json
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse putJson(String apiUri,String json) throws Exception, IOException
+   public static CloseableHttpResponse putJson(String apiUri,String json) throws Exception
    {
 	    return HttpClientHelper.putJson(apiUri, json,null);
    }
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @param headers
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @param headers http headers
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse putJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   public static CloseableHttpResponse putJson(String apiUri,String json,Header[] headers) throws Exception
    {
 	    HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
@@ -149,27 +145,25 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse patchJson(String apiUri,String json) throws Exception, IOException
+   public static CloseableHttpResponse patchJson(String apiUri,String json) throws Exception
    {
 	    return HttpClientHelper.patchJson(apiUri, json,null);
    }
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @param headers
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @param headers http headers
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse patchJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   public static CloseableHttpResponse patchJson(String apiUri,String json,Header[] headers) throws Exception
    {
 	    HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
@@ -187,13 +181,12 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @return
-    * @throws Exception
-    * @throws IOException
+   * @param apiUri  restapi url
+    * @param json post json
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse deleteJson(String apiUri,String json) throws Exception, IOException
+   public static CloseableHttpResponse deleteJson(String apiUri,String json) throws Exception
    {
 	    return HttpClientHelper.deleteJson(apiUri, json,null);
    }
@@ -201,16 +194,15 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @param headers
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @param json post json
+    * @param headers http headers
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse deleteJson(String apiUri,String json,Header[] headers) throws Exception, IOException
+   public static CloseableHttpResponse deleteJson(String apiUri,String json,Header[] headers) throws Exception
    {
-	    HttpClientHelper.createClient();
+	   HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
 	    HttpDelete httpDelete = new HttpDelete(apiUri);
 	    if(headers!=null)
@@ -225,13 +217,11 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @return
-    * @throws Exception
-    * @throws IOException
+    * @param apiUri  restapi url
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse getJson(String apiUri) throws Exception, IOException
+   public static CloseableHttpResponse getJson(String apiUri) throws Exception
    {
 	    return HttpClientHelper.getJson(apiUri,null);
    }
@@ -239,14 +229,12 @@ public class HttpClientHelper
    
    /**
     * 
-    * @param apiUri
-    * @param json
-    * @param headers
-    * @return
-    * @throws Exception
-    * @throws IOException
+   * @param apiUri  restapi url
+    * @param headers http headers
+    * @return response
+    * @throws Exception ex
     */
-   public static CloseableHttpResponse getJson(String apiUri,Header[] headers) throws Exception, IOException
+   public static CloseableHttpResponse getJson(String apiUri,Header[] headers) throws Exception
    {
 	    HttpClientHelper.createClient();
 	    HttpClientHelper.createContext();
