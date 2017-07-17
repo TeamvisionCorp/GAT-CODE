@@ -62,7 +62,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		testCase.PackageName=iStepsCase.StepAssembly.substring(0,iStepsCase.StepAssembly.length()-1)+"_unittest";
 		testCase.ClassName=currentCaseFileName;
 		testCase.CaseName=iStepsCase.Name;
-		testCase.CaseTag=iStepsCase.CaseTags+"fds";
+		testCase.CaseTag=iStepsCase.CaseTags;
 		testCase.CaseType=caseType;
 		testCase.InterfaceID=Integer.valueOf(iStepsCase.InterfaceID);
 		testCase.ModuleID=Integer.valueOf(iStepsCase.ModuleID);

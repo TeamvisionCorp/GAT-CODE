@@ -77,7 +77,7 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
         List<AutoTestCase> result=new ArrayList<AutoTestCase>();
 		CloseableHttpResponse response= HttpClientHelper.getJson(TestCaseImportApi.listApi+String.valueOf(projectID));
 		JSONObject autoCaseObject=JSONObject.fromObject(HttpClientHelper.getResponseText(response));
-		JSONArray autoCaseJsonList=autoCaseObject.getJSONArray("result");
+		JSONArray autoCaseJsonList=autoCaseObject.getJSONObject("result").getJSONArray("results");
 		for(Integer i=0;i<autoCaseJsonList.size();i++)
 		{
 			Gson gsonObject=new Gson();
@@ -87,13 +87,24 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 		return result;
 	}
 	
-	protected String setTestCaseFilePath(String caseFilePath)
+	public String setTestCaseFilePath(String caseFilePath)
 	{
 		String result="";
 		Integer startIndex=caseFilePath.lastIndexOf("Xmls")+5;
 		Integer endIndex=caseFilePath.lastIndexOf(".");
-		result=caseFilePath.substring(startIndex,endIndex);
-		result=result.replaceAll(GlobalConfig.getSlash(),"_");
+		caseFilePath=caseFilePath.substring(startIndex,endIndex);
+		SimpleLogger.logInfo(this.getClass(),"create test class name");
+		SimpleLogger.logInfo(this.getClass(),"the test case filepath is:"+caseFilePath);
+		if(GlobalConfig.getSlash()=="\\")
+		{
+			result=caseFilePath.replaceAll("\\\\","_");
+		}
+		else
+		{
+			result=caseFilePath.replaceAll(GlobalConfig.getSlash(),"_");
+		}
+		result=result.substring(0,result.length()-1);
+		SimpleLogger.logInfo(this.getClass(),"the test class name  is :"+result);
 		return result;
 	}
 
