@@ -67,6 +67,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		testCase.InterfaceID=Integer.valueOf(iStepsCase.InterfaceID);
 		testCase.ModuleID=Integer.valueOf(iStepsCase.ModuleID);
 		testCase.ProjectID=this.project;
+		testCase.Desc=iStepsCase.Desc;
 		return testCase;
 	}
 	

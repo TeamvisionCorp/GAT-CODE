@@ -18,7 +18,7 @@ import com.gateside.autotesting.Lib.dbService.Content.MysqlString;
 public class MysqlService
 {
 	private String connectionString="";
-	private final String MYSQLDRIVERNAME="com.mysql.jdbc.Driver";
+	private final String MYSQLDRIVERNAME="com.mysql.cj.jdbc.Driver";
 	
 	/**
 	 * 

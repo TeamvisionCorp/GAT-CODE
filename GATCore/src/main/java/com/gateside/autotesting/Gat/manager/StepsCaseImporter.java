@@ -91,7 +91,7 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 	{
 		String result="";
 		Integer startIndex=caseFilePath.lastIndexOf("Xmls")+5;
-		Integer endIndex=caseFilePath.lastIndexOf(".");
+		Integer endIndex=caseFilePath.lastIndexOf(".")+1;
 		caseFilePath=caseFilePath.substring(startIndex,endIndex);
 		SimpleLogger.logInfo(this.getClass(),"create test class name");
 		SimpleLogger.logInfo(this.getClass(),"the test case filepath is:"+caseFilePath);

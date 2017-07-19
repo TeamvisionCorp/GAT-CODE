@@ -81,6 +81,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 		testCase.InterfaceID=0;
 		testCase.ModuleID=Integer.valueOf(iStepsCase.ModuleID);
 		testCase.ProjectID=this.project;
+		testCase.Desc=iStepsCase.Desc;
 		return testCase;
 	}
 

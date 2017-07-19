@@ -54,6 +54,9 @@ public class StepsCase extends TestObject
 	@Attribute(name="CaseTags",required=false)
 	public String CaseTags="";
 	
+	@Element(name="Desc",required=false)
+	public String Desc="";
+	
 	
 	
 }
