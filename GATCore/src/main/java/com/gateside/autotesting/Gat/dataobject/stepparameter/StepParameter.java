@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 
 import com.gateside.autotesting.Gat.dataobject.stepparameter.Parameter;
 import com.gateside.autotesting.Gat.dataobject.TestObject;
-import com.thoughtworks.xstream.mapper.Mapper.Null;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

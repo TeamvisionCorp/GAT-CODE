@@ -20,7 +20,7 @@ public class $TemplateClassName {
 	}
 	
 	__TEST__
-	@Test
+	@Test(timeOut = 60000)
 	public void $TemplateTestMethod() throws Exception{
 		CaseExecutor executor = new $InterfaceStepExecutorName($ExecutorParam);
 		executor.execute();

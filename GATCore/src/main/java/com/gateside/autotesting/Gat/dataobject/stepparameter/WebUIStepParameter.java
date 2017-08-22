@@ -1,7 +1,6 @@
 package com.gateside.autotesting.Gat.dataobject.stepparameter;
 
 
-import org.junit.Ignore;
 import org.simpleframework.xml.Root;
 
 import com.gateside.autotesting.Gat.dataobject.stepparameter.StepParameter;
