@@ -28,6 +28,8 @@ public class AutoTestCase {
 	
 	public String Desc;
 	
+	public Boolean IsActive=true;
+	
 	
 	public String toJson()
 	{

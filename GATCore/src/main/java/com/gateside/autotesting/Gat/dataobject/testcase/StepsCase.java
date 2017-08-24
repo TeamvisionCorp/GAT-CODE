@@ -57,6 +57,11 @@ public class StepsCase extends TestObject
 	@Element(name="Desc",required=false)
 	public String Desc="";
 	
+	@Attribute(name="IsActive",required=false)
+	public Boolean IsActive=true;
+	
+	
+	
 	
 	
 }
