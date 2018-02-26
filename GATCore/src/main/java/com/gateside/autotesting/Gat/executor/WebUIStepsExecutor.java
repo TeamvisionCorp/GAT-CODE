@@ -39,7 +39,9 @@ public class WebUIStepsExecutor extends StepsExecutor
 	@Override
 	public void setUp() throws Exception
     {
-		throw new Exception("function not impliment");
+		 preCleanup();
+		 setGlobalConfig();
+		 this.targetCase=this.getTestCase();
 	}
 	
 	
@@ -50,13 +52,17 @@ public class WebUIStepsExecutor extends StepsExecutor
 	public void executeCase() throws Exception 
 	{
 		this.setGlobalConfig();
+		
 		String  screenPictureName="";
 		try 
 		{
+			System.out.println(((WebUIStepsCase)targetCase).Steps.size());
 			for(WebUITestStep step : ((WebUIStepsCase)targetCase).Steps)
 			{
 				screenPictureName=step.StepGroup+"_"+step.StepName+"_"+step.StepParameterID;
 				SimpleLogger.logInfo(this.getClass(),"executeCase: set step parameter path as "+step.StepParametersFilePath);
+				SimpleLogger.logInfo(this.getClass(),"Step case tags id are "+targetCase.CaseTags);
+				SimpleLogger.logInfo(this.getClass(),"Step case desc is "+targetCase.Desc);
 				GlobalConfig.setStepsParameterFilePath(GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.StepParametersFilePath); //set glocal config for pre step parameters
 				GlobalConfig.setuIElementsFilePath(GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.UIElementsFilePath); //set glocal config for pre step parameters
 				InvokedMethodInfo resultInfo=this.getStepMethodInfo(step);

@@ -89,6 +89,7 @@ public class InterfaceStepsExecutor extends StepsExecutor
 			SimpleLogger.logInfo(this.getClass(),"Step case interface id is "+((InterfaceStepsCase)targetCase).InterfaceID);
 			SimpleLogger.logInfo(this.getClass(),"Step case interface module id is "+targetCase.ModuleID);
 			SimpleLogger.logInfo(this.getClass(),"Step case tags id are "+targetCase.CaseTags);
+			SimpleLogger.logInfo(this.getClass(),"Step case desc is "+targetCase.Desc);
 			
 			if(!step.SetUp && !step.TearDown)
 			{

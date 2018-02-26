@@ -2,9 +2,6 @@ package com.gateside.autotesting.Gat.executor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.firefox.internal.NewProfileExtensionConnection;
-
 import com.gateside.autotesting.Gat.executor.CaseExecutor;
 import com.gateside.autotesting.Gat.dataobject.InvokedMethodInfo;
 import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
@@ -57,7 +54,7 @@ public abstract class StepsExecutor extends CaseExecutor
     {
     	String moduleFilePath=GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+moduleFileName;
     	SimpleLogger.logInfo(this.getClass(),"setGlobalConfig: set testmodule file path as "+moduleFilePath);
-		GlobalConfig.setTestCaseFilePath(moduleFilePath); //set global config for testcase file path
+	GlobalConfig.setTestCaseFilePath(moduleFilePath); //set global config for testcase file path
     }
 
 }

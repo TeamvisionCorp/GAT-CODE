@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.gateside.autotesting.Lib.common.SimpleLogger;
 
-import bsh.This;
-import net.sourceforge.htmlunit.corejs.javascript.ast.CatchClause;
 
 public class FileHelper {
 
@@ -45,7 +43,7 @@ public class FileHelper {
 		}
 		catch(Exception ex)
 		{
-			SimpleLogger.logError(This.class,ex);
+			SimpleLogger.logError(FileHelper.class,ex);
 		}
         
     }

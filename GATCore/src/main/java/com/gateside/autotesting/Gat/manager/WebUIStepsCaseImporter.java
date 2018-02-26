@@ -3,7 +3,6 @@ package com.gateside.autotesting.Gat.manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.bcel.generic.RETURN;
 
 import com.gateside.autotesting.Gat.dataobject.TestObject;
 import com.gateside.autotesting.Gat.dataobject.testcase.AutoTestCase;

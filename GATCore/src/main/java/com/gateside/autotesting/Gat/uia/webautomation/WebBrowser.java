@@ -3,6 +3,7 @@ package com.gateside.autotesting.Gat.uia.webautomation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -588,7 +589,14 @@ public class WebBrowser {
 		}
 		case 2:
 		{
-			System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+			String chromeDriverName="chromedriver.exe";
+			Properties props=System.getProperties();
+			String oSName= props.getProperty("os.name"); 
+			if(!oSName.startsWith("Windows"))
+			{
+				chromeDriverName="chromedriver";
+			}
+			System.setProperty("webdriver.chrome.driver",chromeDriverName);
 		    service=ChromeDriverService.createDefaultService();
 			break;
 		}

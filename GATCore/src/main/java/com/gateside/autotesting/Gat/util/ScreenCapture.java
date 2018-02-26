@@ -25,7 +25,7 @@ public class ScreenCapture {
 	       Rectangle screenRectangle = new Rectangle(screenSize);  
 	       Robot robot = new Robot();
 		   BufferedImage image = robot.createScreenCapture(screenRectangle);  
-	       ImageIO.write(image, "png", new File(savedir+"\\"+fileName));
+	       ImageIO.write(image, "png", new File(savedir+GlobalConfig.getSlash()+fileName));
 	} catch (Exception e) 
 	{
         SimpleLogger.logError(ScreenCapture.class,e);
