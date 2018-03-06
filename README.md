@@ -20,15 +20,15 @@ Gattmg最新版本：2.0.9
     
     4 用例描述文件中，可以为用例添加Desc字段，用来添加用例描述信息（具体请查看实例代码）
     
-   <TestCase ID="ModuleUserLogin" Name="UserLogin" StepModule = "true">
+     <TestCase ID="ModuleUserLogin" Name="UserLogin" StepModule = "true">
       <Step StepName="coreMethod" StepParameterID="loginparam" StepGroup="Login" StepAssembly="com.ged.server.api.passport."/>
-   </TestCase>
-     
-   <TestCase ID="Test01" Name="QueryMediaReports01"  CaseTags="BVT,EC">
+     </TestCase>
+    
+     <TestCase ID="Test01" Name="QueryMediaReports01"  CaseTags="BVT,EC">
       <Desc>ec check</Desc>
       <Step StepName="UserLogin" StepModuleID="ModuleUserLogin" ModuleStepParameters=""  StepModule ="true"/>
       <Step StepName="assertMethod" StepParameterID="testparam01"/>
-   </TestCase>
+     </TestCase>
    
    
   GATCore 2.0.7  新功能
