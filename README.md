@@ -1,11 +1,36 @@
 #GAT_Maven_Public
 GAT是一个数据驱动，代码，用例，数据相互分离的接口以及web ui自动化框架。
 
-GATCore:最新版本：2.0.7
-gatesideLib最新版本：2.0.5
-Gattme最新版本：2.0.9
+GATCore:最新版本：2.1.9
+gatesideLib最新版本：2.0.7
+Gattmg最新版本：2.0.9
 
 
+  Gattmg 2.0.9更新：
+  
+    1 配合teamcat，可以将测试用例导入数据库
+
+  GATCore 2.1.9 更新：
+  
+    1 支持最新版webdriver
+    
+    2 支持非windows机器上WebUI自动化
+    
+    3 配合teamcat,支持用例添加CaseTag属性（具体请查看实例代码）
+    
+    4 用例描述文件中，可以为用例添加Desc字段，用来添加用例描述信息（具体请查看实例代码）
+    
+     <TestCase ID="ModuleUserLogin" Name="UserLogin" StepModule = "true">
+      <Step StepName="coreMethod" StepParameterID="loginparam" StepGroup="Login" StepAssembly="com.ged.server.api.passport."/>
+     </TestCase>
+    
+     <TestCase ID="Test01" Name="QueryMediaReports01"  CaseTags="BVT,EC">
+      <Desc>ec check</Desc>
+      <Step StepName="UserLogin" StepModuleID="ModuleUserLogin" ModuleStepParameters=""  StepModule ="true"/>
+      <Step StepName="assertMethod" StepParameterID="testparam01"/>
+     </TestCase>
+   
+   
   GATCore 2.0.7  新功能
 
     1  修复属性值不能包含/的bug。 /做为xml的特定符号，不能包含在属性值中。请使用_来代替属性值中的/
