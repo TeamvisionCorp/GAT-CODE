@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -100,6 +101,14 @@ public class WebBrowser {
 		{
 		case 1: 
 		{
+			String firfoxDriverName="geckodriver.exe";
+			Properties props=System.getProperties();
+			String oSName= props.getProperty("os.name"); 
+			if(!oSName.startsWith("Windows"))
+			{
+				firfoxDriverName="geckodriver";
+			}
+			System.setProperty("webdriver.gecko.driver",firfoxDriverName);
 			webDriver = new FirefoxDriver();
 			break;
 		}
@@ -126,6 +135,14 @@ public class WebBrowser {
 		{
 		case 1: 
 		{
+			String firfoxDriverName="geckodriver.exe";
+			Properties props=System.getProperties();
+			String oSName= props.getProperty("os.name"); 
+			if(!oSName.startsWith("Windows"))
+			{
+				firfoxDriverName="geckodriver";
+			}
+			System.setProperty("webdriver.gecko.driver",firfoxDriverName);
 			webDriver = new FirefoxDriver();
 			break;
 		}
@@ -583,7 +600,7 @@ public class WebBrowser {
 		{
 		case 0:
 		{
-			System.setProperty("webdriver.ie.driver","IEDriverServer.exe");		
+			System.setProperty("webdriver.ie.driver","IEDriverServer.exe");
 			service=InternetExplorerDriverService.createDefaultService();
 			break;
 		}
