@@ -64,6 +64,7 @@ public class WebUIStepsExecutor extends StepsExecutor
 				SimpleLogger.logInfo(this.getClass(),"Step case tags id are "+targetCase.CaseTags);
 				SimpleLogger.logInfo(this.getClass(),"Step case desc is "+targetCase.Desc);
 				GlobalConfig.setStepsParameterFilePath(GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.StepParametersFilePath); //set glocal config for pre step parameters
+				SimpleLogger.logInfo(this.getClass(),"Step ui elements file path as  "+GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.UIElementsFilePath);
 				GlobalConfig.setuIElementsFilePath(GlobalConfig.getAutoProjectName()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+step.UIElementsFilePath); //set glocal config for pre step parameters
 				InvokedMethodInfo resultInfo=this.getStepMethodInfo(step);
 				SimpleLogger.logInfo(this.getClass(),"executeCase: execute step:"+resultInfo.classFullName+resultInfo.methodName+step.StepParameterID);
@@ -86,6 +87,7 @@ public class WebUIStepsExecutor extends StepsExecutor
 		} catch (Exception e) 
 		{
 			saveScreenPicture(screenPictureName,true);
+			throw e;
 		}		
 	}
 	
@@ -187,6 +189,7 @@ public class WebUIStepsExecutor extends StepsExecutor
 		} catch (Exception e)
 		{
 		    SimpleLogger.logError(this.getClass(),e);
+		    throw e;
 		}
 		finally
 		{
