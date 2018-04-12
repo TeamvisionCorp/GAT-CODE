@@ -60,7 +60,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	private List<WebUIStepsCase> getItems(String objectFilePath) throws Exception 
 	{
 		List<WebUIStepsCase> result=new ArrayList<WebUIStepsCase>();
-		WebUIStepsCaseManager webUIStepsCaseManager=(WebUIStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.IStepsCaseManager);
+		WebUIStepsCaseManager webUIStepsCaseManager=(WebUIStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.WebUIElementManager);
 		for(StepsCase item:webUIStepsCaseManager.getAllTestCase(objectFilePath))
 		{
 			result.add((WebUIStepsCase)item);
