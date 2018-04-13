@@ -33,6 +33,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	@Override
 	public void doImport(String rootDir) throws Exception {
 		List<String> allTestCasePaths=this.getFilePath(rootDir);
+		System.out.println(allTestCasePaths);
 		for(String caseFilePath:allTestCasePaths)
 		{
 			this.currentCaseFileName=setTestCaseFilePath(caseFilePath);//the testcase file path is the test class name
@@ -60,7 +61,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	private List<WebUIStepsCase> getItems(String objectFilePath) throws Exception 
 	{
 		List<WebUIStepsCase> result=new ArrayList<WebUIStepsCase>();
-		WebUIStepsCaseManager webUIStepsCaseManager=(WebUIStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.WebUIElementManager);
+		WebUIStepsCaseManager webUIStepsCaseManager=(WebUIStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.WebUIStepCaseManager);
 		for(StepsCase item:webUIStepsCaseManager.getAllTestCase(objectFilePath))
 		{
 			result.add((WebUIStepsCase)item);

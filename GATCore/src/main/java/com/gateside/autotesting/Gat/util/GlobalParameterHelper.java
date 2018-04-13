@@ -12,7 +12,7 @@ public class GlobalParameterHelper
 {
 	 public static GlobalParameter getGlobalParameter()
 	 {
-		 String globalParameterPath=GlobalConfig.getRootDir()+GlobalConfig.getAutoProjectName()+"\\DataFiles\\Xmls\\"+GlobalConfig.getGlobalParameterFileName();
+		 String globalParameterPath=GlobalConfig.getRootDir()+GlobalConfig.getAutoProjectName()+GlobalConfig.getSlash()+"DataFiles"+GlobalConfig.getSlash()+"Xmls"+GlobalConfig.getSlash()+GlobalConfig.getGlobalParameterFileName();
 		 GlobalParameter parameterResult=new GlobalParameter();
 		 String stepParameterXPth="GlobalParameters";
 		 List<Element> globalParameterList=XMLParser.getElementsByXPath(globalParameterPath, stepParameterXPth);

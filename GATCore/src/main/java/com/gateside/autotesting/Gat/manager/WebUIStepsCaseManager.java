@@ -61,6 +61,10 @@ public class WebUIStepsCaseManager extends StepsCaseManager
 	private void resetAssembly(WebUIStepsCase testCase,String filePath)
 	{
 		String assemblyXpath="AllTestCases/StepAssembly";
+		if(testCase.StepAssembly==null || testCase.StepGroup=="")
+		{
+			testCase.StepAssembly=XMLParser.getElementsByXPath(filePath, assemblyXpath).get(0).getTextTrim();
+		}
 		for(WebUITestStep step: testCase.Steps)
 		{
 			if(step.StepAssembly==null || step.StepAssembly=="")
@@ -75,6 +79,10 @@ public class WebUIStepsCaseManager extends StepsCaseManager
 	private void resetGroup(WebUIStepsCase testCase,String filePath)
 	{
 		String groupXpath="AllTestCases/StepGroup";
+		if(testCase.StepGroup==null || testCase.StepGroup=="")
+		{
+			testCase.StepGroup=XMLParser.getElementsByXPath(filePath, groupXpath).get(0).getTextTrim();
+		}
 		for(WebUITestStep step: testCase.Steps)
 		{			
 			if(step.StepGroup==null || step.StepGroup=="")

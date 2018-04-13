@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceTestStep;
+import com.gateside.autotesting.Gat.manager.WebUIStepsCaseImporter;
+import com.gateside.autotesting.Gat.util.GlobalConfig;
 import com.gateside.autotesting.Lib.xmlService.XMLParser;
 import com.gateside.autotesting.Lib.xmlService.XMLSerializer;
 
@@ -39,4 +41,5 @@ public class TestCaseTest
 //	  System.out.println(case12.Steps.size());
 //	  System.out.println(case12.Name);
   }
+ 
 }
