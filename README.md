@@ -1,11 +1,18 @@
 #GAT_Maven_Public
 GAT是一个数据驱动，代码，用例，数据相互分离的接口以及web ui自动化框架。
 
-GATCore:最新版本：2.1.10
+GATCore:最新版本：2.1.15
 gatesideLib最新版本：2.0.7
 Gattmg最新版本：2.0.9
 
+  
+  GATCore 2.1.15 更新：
+  
+    1 支持WebUI用例导入数据库
 
+    2 增加GlobalParameters.xml文件作为全局变量使用，文件默认放在DataFiles/xmls目录下，文件具体名称可通过GlobalConfig.properties文件配置
+      在使用时GlobalParameterHelper帮助类可以获取全局变量数据使用。
+      
   Gattmg 2.0.9更新：
   
     1 配合teamcat，可以将测试用例导入数据库
