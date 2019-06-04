@@ -1,18 +1,5 @@
 package cn.gateside.gattmg.generation;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.rmi.CORBA.PortableRemoteObjectDelegate;
-
-import org.apache.bcel.generic.RETURN;
-import org.dom4j.DocumentException;
-
-import com.gateside.autotesting.Gat.util.GlobalConfig;
-
 import cn.gateside.gattmg.infos.DataFileType;
 import cn.gateside.gattmg.infos.ExecutorType;
 import cn.gateside.gattmg.infos.ProjectInfos;
@@ -21,6 +8,11 @@ import cn.gateside.gattmg.util.DataFilesUtil;
 import cn.gateside.gattmg.util.FileUtil;
 import cn.gateside.gattmg.util.ProjectUtil;
 import cn.gateside.gattmg.util.TemplateUtil;
+import com.gateside.autotesting.Gat.util.GlobalConfig;
+
+import java.io.BufferedInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestClassGenerator {
@@ -163,7 +155,14 @@ public class TestClassGenerator {
 				classFilePath=ProjectUtil.getProjectPath()+ProjectInfos.TEST_SRC_PATH+tempPath+"_unittest";
 				String new_package_name=testStepPackageName.substring(0,testStepPackageName.length()-1)+"_unittest";
 				contents=contents.replaceAll(ProjectInfos.PACKAGE_NAME,new_package_name);
-				packageNameList.add(new_package_name+".");
+				/*
+				/如果packageNameList中已存在该packageName则不再放到list里
+				/修复生成testng xml文件中classes数量不正确的问题
+				*/
+
+				if (!packageNameList.contains(new_package_name+".")) {
+					packageNameList.add(new_package_name+".");
+				}
 			}
 			FileUtil.createFileDir(classFilePath);
 			FileUtil.createFile(classFilePath+GlobalConfig.getSlash(), className + ".java", contents, true);
