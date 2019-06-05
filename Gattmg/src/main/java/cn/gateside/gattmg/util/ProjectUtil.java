@@ -161,7 +161,9 @@ public class ProjectUtil {
 			root.addAttribute("name","Suite");
 			root.addAttribute("parallel", "none");
 			test.addAttribute("name", "Test");
-			XmlExtents.XmlOutput(document, getProjectBasePath() + GlobalConfig.getSlash() + "testNg" + GlobalConfig.getSlash(), entry.getKey() + "testng.xml");
+			String xmlFilePath = getProjectPath() + GlobalConfig.getSlash() + "testNg"+ GlobalConfig.getSlash();
+			FileUtil.createFileDir(xmlFilePath);
+			XmlExtents.XmlOutput(document, xmlFilePath, entry.getKey() + "testNg.xml");
 		}
 	}
 
@@ -170,7 +172,7 @@ public class ProjectUtil {
 		HashMap<String ,List<HashMap<String, List<String>>>> tagMap = new HashMap<>();
 		List<String> dataFileNames = DataFilesUtil.getWholeNames(fileType);
 		List<String> tagLists = new ArrayList<>();
-		String dataFilePath = ProjectUtil.getProjectPath() + GlobalConfig.getSlash()+"DataFiles"+GlobalConfig.getSlash()+"Xmls";
+		String dataFilePath = ProjectUtil.getProjectBasePath() + GlobalConfig.getSlash()+"DataFiles"+GlobalConfig.getSlash()+"Xmls";
 		for(String eachFileName:dataFileNames){   //提取所有tags
 			if(eachFileName.endsWith("TestCase.xml")){
 				eachFileName=eachFileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
