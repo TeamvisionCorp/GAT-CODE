@@ -1,19 +1,15 @@
 package com.gateside.autotesting.Gat.manager;
 
-import com.gateside.autotesting.Gat.manager.StepsCaseManager;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.collections.keyvalue.TiedMapEntry;
-import org.dom4j.Element;
-
 import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceTestStep;
 import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
 import com.gateside.autotesting.Gat.util.GlobalConfig;
 import com.gateside.autotesting.Lib.xmlService.XMLParser;
 import com.gateside.autotesting.Lib.xmlService.XMLSerializer;
+import org.dom4j.Element;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 

@@ -66,7 +66,7 @@ public class TestClassGenerator {
 	}
 	
 	/**
-	 * @param fileType  excle , xml
+	 * @param fileType  excel , xml
 	 * @param filePath   file path
 	 * @throws Exception ex
 	 * @return String list

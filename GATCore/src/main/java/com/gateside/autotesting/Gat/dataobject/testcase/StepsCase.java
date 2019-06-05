@@ -1,18 +1,9 @@
 package com.gateside.autotesting.Gat.dataobject.testcase;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import junit.framework.TestCase;
-
+import com.gateside.autotesting.Gat.dataobject.TestObject;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-
-import com.gateside.autotesting.Gat.dataobject.testcase.EnumSetupType;
-import com.gateside.autotesting.Gat.dataobject.testcase.EnumTearDownType;
-import com.gateside.autotesting.Gat.dataobject.TestObject;
 
 @Root(name="TestCase")
 public class StepsCase extends TestObject

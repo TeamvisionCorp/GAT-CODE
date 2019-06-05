@@ -3,33 +3,21 @@ package cn.gateside.gattmg.generation;
 import cn.gateside.gattmg.infos.DataFileType;
 import cn.gateside.gattmg.infos.ProjectInfos;
 import cn.gateside.gattmg.util.ProjectUtil;
+import com.gateside.autotesting.Lib.common.SimpleLogger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import com.gateside.autotesting.Lib.common.SimpleLogger;
 
 public class FrameGenerator {
 
-//	public static void main(String[] args) 
-//	{
-//		String[] args1={"0"};
-//		if(args1[0].equals("1"))
-//		{
-//			SimpleLogger.logInfo("fds"+args[0]);
-//			createWebUITestProject();
-//		}
-//		else
-//		{
-//		   createInterfaceTestProject();	
-//		}
-//	}
-	
+
 	public static void createInterfaceTestProject()
 	{
 				ProjectGenerator.createProject();
 				String testClassFilePath = ProjectUtil.getProjectPath() + ProjectInfos.SRC_PATH;
 				List<String> packageNameList=new ArrayList<String>();
+				HashMap<String ,List<HashMap<String, List<String>>>> tagMap = new HashMap<>();
 				try 
 				{
 //					SimpleLogger.logInfo("Start create project files");
@@ -47,8 +35,12 @@ public class FrameGenerator {
 					packageNameList.addAll(excelPackageNameList);
 					packageNameList.addAll(XMLPackageNameList);
 					
-					SimpleLogger.logInfo("Start create testng.xml files");
+					SimpleLogger.logInfo("Start create testNg.xml files");
 					ProjectUtil.createTestngXml(packageNameList);
+
+					SimpleLogger.logInfo("Start create Tag Level testNg.xml files");
+					tagMap = ProjectUtil.generateTagMap(DataFileType.XML);
+					ProjectUtil.createTestNgXml(tagMap);
 				} catch (Exception e)
 				{
 					SimpleLogger.logError(e);

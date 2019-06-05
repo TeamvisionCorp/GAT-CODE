@@ -3,8 +3,15 @@ package cn.gateside.gattmg.util;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import cn.gateside.gattmg.infos.DataFileType;
+import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
+import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
+import com.gateside.autotesting.Lib.xmlService.XMLParser;
+import com.gateside.autotesting.Lib.xmlService.XMLSerializer;
 import org.dom4j.Document;
 
 
@@ -17,6 +24,9 @@ import cn.gateside.gattmg.infos.ProjectInfos;
 import cn.gateside.gattmg.infos.TempType;
 
 import com.gateside.autotesting.Gat.util.GlobalConfig;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 public class ProjectUtil {
 	
@@ -125,5 +135,137 @@ public class ProjectUtil {
 		
 		Document document = XmlExtents.createXml("suite", classStringNames);
 		XmlExtents.XmlOutput(document, ProjectUtil.getProjectPath() + GlobalConfig.getSlash(), "testng.xml");
+	}
+
+	public static void createTestNgXml(HashMap<String ,List<HashMap<String, List<String>>>> map) throws Exception{
+
+		for(Map.Entry<String ,List<HashMap<String, List<String>>>> entry : map.entrySet()){
+			Document document = DocumentHelper.createDocument();
+			Element root = document.addElement("suite");
+			Element test = root.addElement("test");
+			Element classes = test.addElement("classes");
+			for (HashMap<String, List<String>> map2:entry.getValue()){
+				for (Map.Entry<String, List<String>> classMethodsMapEntry : map2.entrySet()) {
+
+					String className = classMethodsMapEntry.getKey();
+					Element clazz = classes.addElement("class");
+					clazz.addAttribute("name", className);
+					List<String> methodNameList = classMethodsMapEntry.getValue();
+					Element methods = clazz.addElement("methods");
+					for (String str : methodNameList){
+						Element ele = methods.addElement("include");
+						ele.addAttribute("name", str);
+					}
+				}
+			}
+			root.addAttribute("name","Suite");
+			root.addAttribute("parallel", "none");
+			test.addAttribute("name", "Test");
+			XmlExtents.XmlOutput(document, getProjectBasePath() + GlobalConfig.getSlash() + "testNg" + GlobalConfig.getSlash(), entry.getKey() + "testng.xml");
+		}
+	}
+
+	public static HashMap<String ,List<HashMap<String, List<String>>>> generateTagMap(DataFileType fileType) throws Exception {
+
+		HashMap<String ,List<HashMap<String, List<String>>>> tagMap = new HashMap<>();
+		List<String> dataFileNames = DataFilesUtil.getWholeNames(fileType);
+		List<String> tagLists = new ArrayList<>();
+		String dataFilePath = ProjectUtil.getProjectPath() + GlobalConfig.getSlash()+"DataFiles"+GlobalConfig.getSlash()+"Xmls";
+		for(String eachFileName:dataFileNames){   //提取所有tags
+			if(eachFileName.endsWith("TestCase.xml")){
+				eachFileName=eachFileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
+				List<StepsCase> stepsCaseList = getAllTestCase(dataFilePath + GlobalConfig.getSlash() +eachFileName);
+				for (StepsCase stepsCase : stepsCaseList){
+					String[] tags = stepsCase.CaseTags.split(",");
+					for (String tag : tags){
+						if (!tagLists.contains(tag) && (!tag.trim().isEmpty())){
+							tagLists.add(tag);
+						}
+					}
+				}
+			}
+		}
+		for (String tag : tagLists) {
+			List<HashMap<String, List<String>>> classList = new ArrayList<>();
+			for(String eachFileName:dataFileNames)
+			{
+				List<String> methodList = new ArrayList<>();
+				HashMap<String, List<String>> methodClassMap = new HashMap<>();
+				if(eachFileName.endsWith("TestCase.xml"))
+				{
+					eachFileName=eachFileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
+					String className=DataFilesUtil.getTestClassNames(fileType, eachFileName).get(0);
+					List<StepsCase> stepsCaseList = getAllTestCase(dataFilePath + GlobalConfig.getSlash() +eachFileName);
+					String wholePathToClass = getWholePathToClass(fileType,eachFileName,className);  //package+className
+					for (StepsCase stepsCase : stepsCaseList){
+						if (inCaseTags(tag, stepsCase.CaseTags)){
+							methodList.add(stepsCase.Name);
+						}
+					}
+					if (methodList.size()>0) {
+						methodClassMap.put(wholePathToClass,methodList);
+					}
+				}
+				if (!methodClassMap.isEmpty()) {
+					classList.add(methodClassMap);
+				}
+			}
+			if (classList.size()>0) {
+				tagMap.put(tag,classList);
+			}
+		}
+		return tagMap;
+	}
+
+	public static String getWholePathToClass(DataFileType fileType, String eachFileName, String className) throws IOException, DocumentException {
+
+		String testStepPackageName=DataFilesUtil.getTestStepPackage(fileType, eachFileName);
+		String wholePathToClass = "";
+		if(testStepPackageName.length()!=0)
+		{
+			String[] pageFolders=testStepPackageName.split("\\.");
+			String tempPath="";
+			for(Integer i=0;i<pageFolders.length;i++)
+			{
+				tempPath=tempPath+GlobalConfig.getSlash()+pageFolders[i];
+			}
+			String new_package_name=testStepPackageName.substring(0,testStepPackageName.length()-1)+"_unittest";
+			wholePathToClass = new_package_name + "." + className;
+			return wholePathToClass;
+		}
+		return null;
+	}
+
+	public static List<StepsCase> getAllTestCase(String filePath) {
+		List<StepsCase> result=new ArrayList<>();
+		String testCaseXPth="AllTestCases/TestCase";
+		List<Element> caseXMLElement=getTestObjectXMLs(filePath, testCaseXPth);
+		for(Element item:caseXMLElement)
+		{
+			InterfaceStepsCase caseResult=new InterfaceStepsCase();
+			caseResult= (InterfaceStepsCase) XMLSerializer.XMLToObject(caseResult,item.asXML());
+			// caseResult=iManager.formatTestCase(caseResult, filePath);
+			result.add(caseResult);
+		}
+		return result;
+	}
+
+	private static boolean inCaseTags(String tag, String caseTags){
+		if (tag.equals(caseTags)){
+			return true;
+		}
+		if (caseTags.contains(tag + ",") || caseTags.contains("," + tag)){
+			return true;
+		}
+
+		return false;
+	}
+
+
+
+	protected static List<Element> getTestObjectXMLs(String xmlFilePath,String elementXpath)
+	{
+		List<Element> XMLElements= XMLParser.getElementsByXPath(xmlFilePath, elementXpath);
+		return XMLElements;
 	}
 }

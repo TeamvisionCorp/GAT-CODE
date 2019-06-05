@@ -73,7 +73,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 	}
 	
 	
-	private List<InterfaceStepsCase> getItems(String objectFilePath) throws Exception 
+	private List<InterfaceStepsCase> getItems(String objectFilePath) throws Exception
 	{
 		List<InterfaceStepsCase> result=new ArrayList<InterfaceStepsCase>();
 		InterfaceStepsCaseManager interfaceStepsCaseManager=(InterfaceStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.IStepsCaseManager);
@@ -83,8 +83,6 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		}
 		return result;
 	}
-	
-	
 
 
 }
