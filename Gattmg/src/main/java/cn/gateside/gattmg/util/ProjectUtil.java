@@ -138,11 +138,8 @@ public class ProjectUtil {
 	}
 
 	/**
-	 * HashMap<String ,List<HashMap<String, List<String>>>>
-	 * 哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
-	 * 所有的classes及其下属的methods信息，如下所示
-	 * HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
-	 * 遍历其生成所有Tags对应的xml文件。
+	 * according to the relations in TagMap,we can easily
+	 * get each tag's testNg xml file created.
 	 * author whAtsVp
 	 * @param tagMap
 	 * @throws Exception
@@ -179,13 +176,11 @@ public class ProjectUtil {
 
 
 	/**
-	 * 读取所有TestCase文件获取tagList，然后遍历所有文件、文件中的所有用例
-	 * 如果用例中包含tag，则将用例放到当前用例对应Class的methodList中。遍历
-	 * 所有文件完毕之后，生成tag对应的文件List。
+	 * Traversal all TestCase files we get tagList，then traversal all files and
+	 * testCases in them we get the methodList in each class。Finally we got the tagMap
 	 * author whAtsVp
 	 * @param fileType
-	 * @return 返回的哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
-	 * 所有的classes及其下属的methods信息，如下所示
+	 * @return tagMap
 	 * @throws Exception
 	 */
 	public static HashMap<String ,List<HashMap<String, List<String>>>> generateTagMap(DataFileType fileType) throws Exception {
@@ -246,7 +241,7 @@ public class ProjectUtil {
 	 * @param fileType
 	 * @param eachFileName
 	 * @param className
-	 * @return
+	 * @return whole.path.to.package.className
 	 * @throws IOException
 	 * @throws DocumentException
 	 */
@@ -273,7 +268,7 @@ public class ProjectUtil {
 	/**
 	 * author whAtsVp
 	 * @param filePath
-	 * @return
+	 * @return stepsCase list in the file
 	 */
 
 	public static List<StepsCase> getAllTestCase(String filePath) {
@@ -294,7 +289,7 @@ public class ProjectUtil {
 	 * author whAtsVp
 	 * @param tag
 	 * @param caseTags
-	 * @return
+	 * @return whether the tag in caseTags or not
 	 */
 
 	private static boolean inCaseTags(String tag, String caseTags){
@@ -313,7 +308,7 @@ public class ProjectUtil {
 	 * author whAtsVp
 	 * @param xmlFilePath
 	 * @param elementXpath
-	 * @return
+	 * @return list of elements
 	 */
 
 	protected static List<Element> getTestObjectXMLs(String xmlFilePath,String elementXpath)
