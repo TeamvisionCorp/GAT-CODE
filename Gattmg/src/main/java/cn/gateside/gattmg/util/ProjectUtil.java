@@ -138,14 +138,14 @@ public class ProjectUtil {
 	}
 
 	/**
-	 * 		HashMap<String ,List<HashMap<String, List<String>>>>
-	 * 		哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
-	 * 		所有的classes及其下属的methods信息，如下所示
-	 * 		HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
-	 *     	遍历其生成所有Tags对应的xml文件。
-	 *
-	 * @author whAtsVp
-	 *
+	 * HashMap<String ,List<HashMap<String, List<String>>>>
+	 * 哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
+	 * 所有的classes及其下属的methods信息，如下所示
+	 * HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
+	 * 遍历其生成所有Tags对应的xml文件。
+	 * author whAtsVp
+	 * @param tagMap
+	 * @throws Exception
 	 */
 
 	public static void createTestNgXml(HashMap<String ,List<HashMap<String, List<String>>>> tagMap) throws Exception{
@@ -177,17 +177,16 @@ public class ProjectUtil {
 		}
 	}
 
+
 	/**
 	 * 读取所有TestCase文件获取tagList，然后遍历所有文件、文件中的所有用例
 	 * 如果用例中包含tag，则将用例放到当前用例对应Class的methodList中。遍历
 	 * 所有文件完毕之后，生成tag对应的文件List。
-	 *
-	 * @author whAtsVp
-	 * @return HashMap<String ,List<HashMap<String, List<String>>>>
-	 *     返回的哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
-	 *     所有的classes及其下属的methods信息，如下所示
-	 *     HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
-	 *
+	 * author whAtsVp
+	 * @param fileType
+	 * @return 返回的哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
+	 * 所有的classes及其下属的methods信息，如下所示
+	 * @throws Exception
 	 */
 	public static HashMap<String ,List<HashMap<String, List<String>>>> generateTagMap(DataFileType fileType) throws Exception {
 
@@ -243,9 +242,13 @@ public class ProjectUtil {
 
 
 	/**
-	 *
-	 * @author whAtsVp
-	 *
+	 * author whAtsVp
+	 * @param fileType
+	 * @param eachFileName
+	 * @param className
+	 * @return
+	 * @throws IOException
+	 * @throws DocumentException
 	 */
 
 	public static String getWholePathToClass(DataFileType fileType, String eachFileName, String className) throws IOException, DocumentException {
@@ -268,9 +271,9 @@ public class ProjectUtil {
 	}
 
 	/**
-	 *
-	 * @author whAtsVp
-	 *
+	 * author whAtsVp
+	 * @param filePath
+	 * @return
 	 */
 
 	public static List<StepsCase> getAllTestCase(String filePath) {
@@ -288,9 +291,10 @@ public class ProjectUtil {
 	}
 
 	/**
-	 *	每个用例可以有多个tag，此方法用于判断当前用例的tags是否包含某tag
-	 * @author whAtsVp
-	 *
+	 * author whAtsVp
+	 * @param tag
+	 * @param caseTags
+	 * @return
 	 */
 
 	private static boolean inCaseTags(String tag, String caseTags){
@@ -306,10 +310,12 @@ public class ProjectUtil {
 
 
 	/**
-	 *
-	 * @author whAtsVp
-	 *
+	 * author whAtsVp
+	 * @param xmlFilePath
+	 * @param elementXpath
+	 * @return
 	 */
+
 	protected static List<Element> getTestObjectXMLs(String xmlFilePath,String elementXpath)
 	{
 		List<Element> XMLElements= XMLParser.getElementsByXPath(xmlFilePath, elementXpath);
