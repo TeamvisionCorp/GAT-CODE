@@ -1,2 +1,6 @@
 /target/
-/src/
+.settings
+.project
+target
+.classpath
+.gitignore
