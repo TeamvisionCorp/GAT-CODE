@@ -137,16 +137,26 @@ public class ProjectUtil {
 		XmlExtents.XmlOutput(document, ProjectUtil.getProjectPath() + GlobalConfig.getSlash(), "testng.xml");
 	}
 
-	public static void createTestNgXml(HashMap<String ,List<HashMap<String, List<String>>>> map) throws Exception{
+	/**
+	 * 		HashMap<String ,List<HashMap<String, List<String>>>>
+	 * 		哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
+	 * 		所有的classes及其下属的methods信息，如下所示
+	 * 		HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
+	 *     	遍历其生成所有Tags对应的xml文件。
+	 *
+	 * @author whAtsVp
+	 *
+	 */
 
-		for(Map.Entry<String ,List<HashMap<String, List<String>>>> entry : map.entrySet()){
+	public static void createTestNgXml(HashMap<String ,List<HashMap<String, List<String>>>> tagMap) throws Exception{
+
+		for(Map.Entry<String ,List<HashMap<String, List<String>>>> tagEntry : tagMap.entrySet()){
 			Document document = DocumentHelper.createDocument();
 			Element root = document.addElement("suite");
 			Element test = root.addElement("test");
 			Element classes = test.addElement("classes");
-			for (HashMap<String, List<String>> map2:entry.getValue()){
-				for (Map.Entry<String, List<String>> classMethodsMapEntry : map2.entrySet()) {
-
+			for (HashMap<String, List<String>> classMethodsMap:tagEntry.getValue()){
+				for (Map.Entry<String, List<String>> classMethodsMapEntry : classMethodsMap.entrySet()) {
 					String className = classMethodsMapEntry.getKey();
 					Element clazz = classes.addElement("class");
 					clazz.addAttribute("name", className);
@@ -163,10 +173,22 @@ public class ProjectUtil {
 			test.addAttribute("name", "Test");
 			String xmlFilePath = getProjectPath() + GlobalConfig.getSlash() + "testNg"+ GlobalConfig.getSlash();
 			FileUtil.createFileDir(xmlFilePath);
-			XmlExtents.XmlOutput(document, xmlFilePath, entry.getKey() + "testNg.xml");
+			XmlExtents.XmlOutput(document, xmlFilePath, tagEntry.getKey() + "testNg.xml");
 		}
 	}
 
+	/**
+	 * 读取所有TestCase文件获取tagList，然后遍历所有文件、文件中的所有用例
+	 * 如果用例中包含tag，则将用例放到当前用例对应Class的methodList中。遍历
+	 * 所有文件完毕之后，生成tag对应的文件List。
+	 *
+	 * @author whAtsVp
+	 * @return HashMap<String ,List<HashMap<String, List<String>>>>
+	 *     返回的哈希Map结构对应testNgXml中的层级关系，最外层的List包含了
+	 *     所有的classes及其下属的methods信息，如下所示
+	 *     HashMap<Tags ,List<HashMap<Classes, List<methods>>>>
+	 *
+	 */
 	public static HashMap<String ,List<HashMap<String, List<String>>>> generateTagMap(DataFileType fileType) throws Exception {
 
 		HashMap<String ,List<HashMap<String, List<String>>>> tagMap = new HashMap<>();
@@ -219,6 +241,13 @@ public class ProjectUtil {
 		return tagMap;
 	}
 
+
+	/**
+	 *
+	 * @author whAtsVp
+	 *
+	 */
+
 	public static String getWholePathToClass(DataFileType fileType, String eachFileName, String className) throws IOException, DocumentException {
 
 		String testStepPackageName=DataFilesUtil.getTestStepPackage(fileType, eachFileName);
@@ -238,6 +267,12 @@ public class ProjectUtil {
 		return null;
 	}
 
+	/**
+	 *
+	 * @author whAtsVp
+	 *
+	 */
+
 	public static List<StepsCase> getAllTestCase(String filePath) {
 		List<StepsCase> result=new ArrayList<>();
 		String testCaseXPth="AllTestCases/TestCase";
@@ -252,6 +287,12 @@ public class ProjectUtil {
 		return result;
 	}
 
+	/**
+	 *	每个用例可以有多个tag，此方法用于判断当前用例的tags是否包含某tag
+	 * @author whAtsVp
+	 *
+	 */
+
 	private static boolean inCaseTags(String tag, String caseTags){
 		if (tag.equals(caseTags)){
 			return true;
@@ -264,7 +305,11 @@ public class ProjectUtil {
 	}
 
 
-
+	/**
+	 *
+	 * @author whAtsVp
+	 *
+	 */
 	protected static List<Element> getTestObjectXMLs(String xmlFilePath,String elementXpath)
 	{
 		List<Element> XMLElements= XMLParser.getElementsByXPath(xmlFilePath, elementXpath);
