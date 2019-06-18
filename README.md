@@ -3,9 +3,20 @@ GAT是一个数据驱动，代码，用例，数据相互分离的接口以及we
 
 GATCore:最新版本：2.1.15
 gatesideLib最新版本：2.0.7
-Gattmg最新版本：2.0.9
+Gattmg最新版本：2.1.15
 
+
+  Gattmg 2.1.15 更新：
   
+    1 在生成用例时，根据CaseTag标签分别生成testng.xml，提供本地分类执行用例的能力。新功能仅需升级Gattmg 到2.1.15版本，无需其他任何操作
+    
+    如下用例描述文件，在生成用例时将在项目目录下的testNG文件夹中生成P1testNG.xml,P2testNG.xml,P3testNG.xml三个文件，可以使用这三个文件在
+    本地分别执行P1,P2,P3三个不同分类的用例。
+    
+    <TestCase ID="ModuleUserLogin" Name="UserLogin" CaseTag="P1,P2,P3">
+      <Step StepName="coreMethod" StepParameterID="loginparam" StepGroup="Login" StepAssembly="com.ged.server.api.passport."/>
+     </TestCase>
+    
   GATCore 2.1.15 更新：
   
     1 支持WebUI用例导入数据库
