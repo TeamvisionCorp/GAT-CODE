@@ -212,7 +212,7 @@ public class ClassReflector
     	List<Class<?>> classList=new ArrayList<Class<?>>();
     	try 
     	{
-    		System.out.print(instanceArray.length);
+    		//System.out.print(instanceArray.length);
     		for(Object instance : instanceArray)
         	{
                 if(instance==null) throw new Exception("parameters instance is null!");
