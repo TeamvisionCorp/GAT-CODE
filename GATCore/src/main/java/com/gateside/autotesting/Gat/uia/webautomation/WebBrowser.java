@@ -357,6 +357,7 @@ public class WebBrowser {
 		}
 	}
 
+
 	public void switchToChildWindow(Integer timeForWait) throws Exception {
 		Thread.sleep(timeForWait);
 		Set<String> handles = this.getDriver().getWindowHandles();

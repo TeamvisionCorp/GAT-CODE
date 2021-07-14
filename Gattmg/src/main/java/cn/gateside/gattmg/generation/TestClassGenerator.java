@@ -139,7 +139,8 @@ public class TestClassGenerator {
             eachFileName=eachFileName.replace(DataFilesUtil.getDataFilesPath(DataFileType.XML)+GlobalConfig.getSlash(),"");
             String className=DataFilesUtil.getTestClassNames(DataFileType.XML, eachFileName).get(0);
 			List<String> testMethodNames = DataFilesUtil.getTestMethodNames(fileType, eachFileName, "");
-			List<String> executorParams = DataFilesUtil.getExecutorParams(fileType, eachFileName, "");				
+			List<String> executorParams = DataFilesUtil.getExecutorParams(fileType, eachFileName, "");
+			System.out.println(executorParams);
 			String contents = TestClassGenerator.generateTestClassContent(execturType.toString(),
 					className, testMethodNames, executorParams);
 			String testStepPackageName=DataFilesUtil.getTestStepPackage(fileType, eachFileName);
@@ -156,8 +157,8 @@ public class TestClassGenerator {
 				String new_package_name=testStepPackageName.substring(0,testStepPackageName.length()-1)+"_unittest";
 				contents=contents.replaceAll(ProjectInfos.PACKAGE_NAME,new_package_name);
 				/*
-				/如果packageNameList中已存在该packageName则不再放到list里
-				/修复生成testng xml文件中classes数量不正确的问题
+				/濡傛灉packageNameList涓凡瀛樺湪璇ackageName鍒欎笉鍐嶆斁鍒發ist閲�
+				/淇鐢熸垚testng xml鏂囦欢涓璫lasses鏁伴噺涓嶆纭殑闂
 				*/
 
 				if (!packageNameList.contains(new_package_name+".")) {

@@ -69,11 +69,12 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		testCase.ProjectID=this.project;
 		testCase.Desc=iStepsCase.Desc;
 		testCase.IsActive=iStepsCase.IsActive;
+		testCase.TestCaseKey = iStepsCase.TestCaseKey;
 		return testCase;
 	}
 	
 	
-	private List<InterfaceStepsCase> getItems(String objectFilePath) throws Exception
+	private List<InterfaceStepsCase> getItems(String objectFilePath) throws Exception 
 	{
 		List<InterfaceStepsCase> result=new ArrayList<InterfaceStepsCase>();
 		InterfaceStepsCaseManager interfaceStepsCaseManager=(InterfaceStepsCaseManager)TestObjectManagerFactory.getTestObjectManager(EnumObjectManager.IStepsCaseManager);
@@ -83,6 +84,8 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		}
 		return result;
 	}
+	
+	
 
 
 }

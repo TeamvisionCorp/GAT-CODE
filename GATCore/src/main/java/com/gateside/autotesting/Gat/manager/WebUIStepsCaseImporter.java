@@ -83,6 +83,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 		testCase.ProjectID=this.project;
 		testCase.Desc=iStepsCase.Desc;
 		testCase.IsActive=iStepsCase.IsActive;
+		testCase.TestCaseKey = iStepsCase.TestCaseKey;
 		return testCase;
 	}
 

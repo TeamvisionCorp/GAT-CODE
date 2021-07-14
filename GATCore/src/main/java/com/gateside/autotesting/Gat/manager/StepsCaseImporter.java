@@ -54,6 +54,7 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 		    	      break;
 		       }
 			}
+			SimpleLogger.logInfo(this.getClass(),stepCase.toJson());
 			if(isCaseExists)
 			{
 				response= HttpClientHelper.putJson(TestCaseImportApi.putApi+String.valueOf(stepCase.id)+"/",stepCase.toJson());

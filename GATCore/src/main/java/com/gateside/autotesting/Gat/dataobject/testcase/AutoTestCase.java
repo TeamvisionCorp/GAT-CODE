@@ -28,6 +28,8 @@ public class AutoTestCase {
 	
 	public String Desc;
 	
+	public String TestCaseKey="";
+	
 	public Boolean IsActive=true;
 	
 	

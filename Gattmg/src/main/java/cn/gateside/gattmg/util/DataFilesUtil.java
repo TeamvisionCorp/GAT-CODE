@@ -196,14 +196,16 @@ public class DataFilesUtil {
 	 */
 	public static List<String> getExecutorParams(DataFileType fileType, String fileName, String sheetName) throws Exception, DocumentException{
 		List<String> executorParamList = new ArrayList<String>();
-				
+		String fileNameFormat = fileName.substring(0, fileName.lastIndexOf(".")).replace("/","\"+GlobalConfig.getSlash()+\"");
+		fileNameFormat = fileNameFormat.replace("\\","\"+GlobalConfig.getSlash()+\"");
+	    System.out.println(fileNameFormat);
 		if(fileType == DataFileType.EXCEL)
 		{
 			List<String> ids = getTestMethodNames(fileType, fileName, sheetName);
 			for(String id:ids)
 			{
 //				fileName=fileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
-				executorParamList.add("\"" + fileName.substring(0, fileName.lastIndexOf(".")).replace("\\","\\\\") + "." + sheetName + "." + id + "\"");
+				executorParamList.add("\"" +fileNameFormat+ "." + sheetName + "." + id + "\"");
 			}
 		}
 		else
@@ -217,10 +219,11 @@ public class DataFilesUtil {
 
 					
 //					fileName=fileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
-					executorParamList.add("\"" + fileName.substring(0, fileName.lastIndexOf(".")).replace("\\","\\\\") + ".xml\"" + ","+"\""+id+"\"");
+					executorParamList.add("\"" + fileNameFormat + ".xml\"" + ","+"\""+id+"\"");
 				}
 			}
 		}
+		System.out.println(executorParamList.size());
 		return executorParamList;
 	}
 }
