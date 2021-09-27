@@ -21,6 +21,7 @@ public class AutoTestCase {
 	public Integer ModuleID;
 	
 	public Integer InterfaceID;
+	public Integer CaseGroupID;
 	
 	public String CaseTag;
 	

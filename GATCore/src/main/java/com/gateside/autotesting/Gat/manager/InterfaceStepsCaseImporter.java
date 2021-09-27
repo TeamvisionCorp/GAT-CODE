@@ -21,12 +21,22 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 	private Integer project=0;
 	private List<AutoTestCase> projectAllCase=null;
 	private Integer caseType=1;
-
-	public InterfaceStepsCaseImporter(Integer projectID,Integer caseType) throws Exception 
+	private Integer caseGroup = 0;
+	
+    
+    /**
+     * 
+     * @param projectID  项目ID
+     * @param caseType   用例类型，接口，WebUI
+     * @param caseGroup  自动化用例库ID
+     * @throws Exception
+     */
+	public InterfaceStepsCaseImporter(Integer projectID,Integer caseType,Integer caseGroup) throws Exception 
 	{
 		this.project=projectID;
 		this.projectAllCase=this.getProjectAutoCase(projectID);
 		this.caseType=caseType;
+		this.caseGroup = caseGroup;
 	}
 	
 	@Override
@@ -42,7 +52,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 				{
 					if(!stepCase.StepModule)
 					{
-						this.sendImportRequest(this.toDBBean(stepCase, this.caseType),this.projectAllCase);
+						this.sendImportRequest(this.toDBBean(stepCase, this.caseType,this.caseGroup),this.projectAllCase);
 					}
 				}	
 			}
@@ -56,7 +66,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 	}
 	
 
-	private AutoTestCase toDBBean(TestObject testObject,Integer caseType) throws Exception {
+	private AutoTestCase toDBBean(TestObject testObject,Integer caseType,Integer caseGroup) throws Exception {
 		InterfaceStepsCase iStepsCase=(InterfaceStepsCase)testObject;
 		AutoTestCase testCase=new AutoTestCase();
 		testCase.PackageName=iStepsCase.StepAssembly.substring(0,iStepsCase.StepAssembly.length()-1)+"_unittest";
@@ -70,6 +80,7 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		testCase.Desc=iStepsCase.Desc;
 		testCase.IsActive=iStepsCase.IsActive;
 		testCase.TestCaseKey = iStepsCase.TestCaseKey;
+		testCase.CaseGroupID = caseGroup;
 		return testCase;
 	}
 	

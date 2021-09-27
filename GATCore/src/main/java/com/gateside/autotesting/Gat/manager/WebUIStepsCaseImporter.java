@@ -22,12 +22,14 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	private Integer project=0;
 	private List<AutoTestCase> projectAllCase=null;
 	private Integer caseType=1;
+	private Integer caseGroup = 0;
 
-	public WebUIStepsCaseImporter(Integer projectID,Integer caseType) throws Exception 
+	public WebUIStepsCaseImporter(Integer projectID,Integer caseType,Integer caseGroup) throws Exception 
 	{
 		this.project=projectID;
 		this.projectAllCase=this.getProjectAutoCase(projectID);
 		this.caseType=caseType;
+		this.caseGroup = caseGroup;
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 				{
 					if(!stepCase.StepModule)
 					{
-						this.sendImportRequest(this.toDBBean(stepCase, this.caseType),this.projectAllCase);
+						this.sendImportRequest(this.toDBBean(stepCase, this.caseType,this.caseGroup),this.projectAllCase);
 					}
 				}	
 			}
@@ -70,7 +72,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 	}
 	
 	
-	private AutoTestCase toDBBean(TestObject testObject,Integer caseType) throws Exception {
+	private AutoTestCase toDBBean(TestObject testObject,Integer caseType,Integer caseGroup) throws Exception {
 		WebUIStepsCase iStepsCase=(WebUIStepsCase)testObject;
 		AutoTestCase testCase=new AutoTestCase();
 		testCase.PackageName=iStepsCase.StepAssembly.substring(0,iStepsCase.StepAssembly.length()-1)+"_unittest";
@@ -84,6 +86,7 @@ public class WebUIStepsCaseImporter extends StepsCaseImporter
 		testCase.Desc=iStepsCase.Desc;
 		testCase.IsActive=iStepsCase.IsActive;
 		testCase.TestCaseKey = iStepsCase.TestCaseKey;
+		testCase.CaseGroupID = caseGroup;
 		return testCase;
 	}
 
