@@ -1,12 +1,8 @@
 package com.gateside.autotesting.Gat.executor;
 
-import java.lang.reflect.Method;
-
 import com.gateside.autotesting.Gat.dataobject.EnumObjectManager;
 import com.gateside.autotesting.Gat.dataobject.InvokedMethodInfo;
 import com.gateside.autotesting.Gat.dataobject.TestObject;
-import com.gateside.autotesting.Gat.dataobject.stepparameter.InterfaceStepParameter;
-import com.gateside.autotesting.Gat.dataobject.testcase.TestStep;
 import com.gateside.autotesting.Gat.manager.IManager;
 import com.gateside.autotesting.Gat.manager.TestObjectManagerFactory;
 import com.gateside.autotesting.Gat.util.GlobalConfig;
@@ -14,9 +10,8 @@ import com.gateside.autotesting.Gat.util.ParameterChecker;
 import com.gateside.autotesting.Gat.util.StepValuePool;
 import com.gateside.autotesting.Lib.common.ClassReflector;
 import com.gateside.autotesting.Lib.common.SimpleLogger;
-import com.gateside.autotesting.Lib.httpclientService.HttpClientHelper;
-import com.gateside.autotesting.Lib.httpunitService.HttpUnitHelper;
-import com.meterware.httpunit.HttpUnitOptions;
+
+import java.lang.reflect.Method;
 
 public abstract class CaseExecutor 
 {

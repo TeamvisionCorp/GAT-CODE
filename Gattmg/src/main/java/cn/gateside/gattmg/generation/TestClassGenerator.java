@@ -36,15 +36,17 @@ public class TestClassGenerator {
 	 * @param testClassName class name
 	 * @param testMethodNames method name
 	 * @param executorParams executor parameters
-	 * @return String
+     * @param templatePath template File Path
+     * @return String
 	 * @throws Exception  ex
 	 */
-	public static String generateTestClassContent(String executorName, String testClassName, 
-			List<String> testMethodNames, List<String> executorParams) throws Exception{
+    public static String generateTestClassContent(String executorName, String testClassName,
+                                                  List<String> testMethodNames, List<String> executorParams, String templatePath) throws Exception {
 		String testString = null;
 		StringBuilder stringBuilder = new StringBuilder();
-		
-		BufferedInputStream input = TemplateUtil.init(TemplateUtil.getTempPath() + "TestClassTmp");
+
+        // BufferedInputStream input = TemplateUtil.init(TemplateUtil.getTempPath() + "TestClassTmp");
+        BufferedInputStream input = TemplateUtil.init(templatePath);
 		String srcStrings = FileUtil.fileToString(input);
 		String[] splitedStrings = TemplateUtil.splitTestClassTmp(srcStrings, TemplateInfos.__TEST__);
 		
@@ -113,7 +115,8 @@ public class TestClassGenerator {
 				List<String> testMethodNames = DataFilesUtil.getTestMethodNames(DataFileType.EXCEL, eachFileName, eachSheet);
 				List<String> executorParams = DataFilesUtil.getExecutorParams(DataFileType.EXCEL, eachFileName, eachSheet);
 				String contents = TestClassGenerator.generateTestClassContent(ExecutorType.InterfaceSingleStepExecutor.toString(),
-						moduleName+eachSheet, testMethodNames, executorParams);
+                        moduleName + eachSheet, testMethodNames, executorParams,
+                        TemplateUtil.getTempPath() + "TestClassTmp");
 				FileUtil.createFile(filePath+moduleName, eachSheet + ".java", contents, true);
 			}	
 		}
@@ -142,7 +145,8 @@ public class TestClassGenerator {
 			List<String> executorParams = DataFilesUtil.getExecutorParams(fileType, eachFileName, "");
 			System.out.println(executorParams);
 			String contents = TestClassGenerator.generateTestClassContent(execturType.toString(),
-					className, testMethodNames, executorParams);
+                    className, testMethodNames, executorParams,
+                    TemplateUtil.getTempPath() + "TestClassTmp");
 			String testStepPackageName=DataFilesUtil.getTestStepPackage(fileType, eachFileName);
 			if(testStepPackageName.length()!=0)
 			{
@@ -164,7 +168,7 @@ public class TestClassGenerator {
 				if (!packageNameList.contains(new_package_name+".")) {
 					packageNameList.add(new_package_name+".");
 				}
-			}
+            }
 			FileUtil.createFileDir(classFilePath);
 			FileUtil.createFile(classFilePath+GlobalConfig.getSlash(), className + ".java", contents, true);
             }	
