@@ -134,8 +134,8 @@ public class ProjectUtil {
 	 * according to the relations in TagMap,we can easily
 	 * get each tag's testNg xml file created.
 	 * author whAtsVp
-	 * @param tagMap
-	 * @throws Exception
+     * @param tagMap tagMap
+     * @throws Exception ex
 	 */
 
 	public static void createTestNgXml(HashMap<String ,List<HashMap<String, List<String>>>> tagMap) throws Exception{
@@ -172,9 +172,9 @@ public class ProjectUtil {
 	 * Traversal all TestCase files we get tagList，then traversal all files and
 	 * testCases in them we get the methodList in each class。Finally we got the tagMap
 	 * author whAtsVp
-	 * @param fileType
-	 * @return tagMap
-	 * @throws Exception
+     * @param fileType fileType
+     * @return HashMap tagMap
+     * @throws Exception ex
 	 */
 	public static HashMap<String ,List<HashMap<String, List<String>>>> generateTagMap(DataFileType fileType) throws Exception {
 
@@ -231,12 +231,12 @@ public class ProjectUtil {
 
 	/**
 	 * author whAtsVp
-	 * @param fileType
-	 * @param eachFileName
-	 * @param className
-	 * @return whole.path.to.package.className
-	 * @throws IOException
-	 * @throws DocumentException
+     * @param fileType fileType
+     * @param eachFileName eachFileName
+     * @param className className
+     * @return String whole.path.to.package.className
+     * @throws IOException ex
+     * @throws DocumentException ex
 	 */
 
 	public static String getWholePathToClass(DataFileType fileType, String eachFileName, String className) throws IOException, DocumentException {
@@ -260,7 +260,7 @@ public class ProjectUtil {
 
 	/**
 	 * author whAtsVp
-	 * @param filePath
+     * @param filePath xml filePath
 	 * @return stepsCase list in the file
 	 */
 
@@ -280,8 +280,8 @@ public class ProjectUtil {
 
 	/**
 	 * author whAtsVp
-	 * @param tag
-	 * @param caseTags
+     * @param tag tag
+     * @param caseTags tags
 	 * @return whether the tag in caseTags or not
 	 */
 
@@ -299,8 +299,8 @@ public class ProjectUtil {
 
 	/**
 	 * author whAtsVp
-	 * @param xmlFilePath
-	 * @param elementXpath
+     * @param xmlFilePath xml filePath
+     * @param elementXpath element Xpath
 	 * @return list of elements
 	 */
 

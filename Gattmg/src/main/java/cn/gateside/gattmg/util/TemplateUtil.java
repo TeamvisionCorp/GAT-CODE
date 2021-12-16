@@ -1,5 +1,8 @@
 package cn.gateside.gattmg.util;
 
+import cn.gateside.gattmg.infos.TemplateInfos;
+import com.gateside.autotesting.Gat.util.GlobalConfig;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,20 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-import cn.gateside.gattmg.infos.TemplateInfos;
-
-import com.gateside.autotesting.Gat.util.GlobalConfig;
-
 public class TemplateUtil {
 
 	/**
 	 * 
 	 * @param path file path
 	 * @return  BufferedInputStream
-	 * @throws FileNotFoundException
+     * @throws FileNotFoundException ex
 	 */
 	public static BufferedInputStream init(String path)
 			throws FileNotFoundException {
