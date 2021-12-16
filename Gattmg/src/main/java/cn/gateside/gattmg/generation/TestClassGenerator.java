@@ -160,10 +160,6 @@ public class TestClassGenerator {
 				classFilePath=ProjectUtil.getProjectPath()+ProjectInfos.TEST_SRC_PATH+tempPath+"_unittest";
 				String new_package_name=testStepPackageName.substring(0,testStepPackageName.length()-1)+"_unittest";
 				contents=contents.replaceAll(ProjectInfos.PACKAGE_NAME,new_package_name);
-				/*
-				/濡傛灉packageNameList涓凡瀛樺湪璇ackageName鍒欎笉鍐嶆斁鍒發ist閲�
-				/淇鐢熸垚testng xml鏂囦欢涓璫lasses鏁伴噺涓嶆纭殑闂
-				*/
 
 				if (!packageNameList.contains(new_package_name+".")) {
 					packageNameList.add(new_package_name+".");

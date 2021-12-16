@@ -1,32 +1,25 @@
 package cn.gateside.gattmg.util;
 
+import cn.gateside.gattmg.extents.XmlExtents;
+import cn.gateside.gattmg.infos.DataFileType;
+import cn.gateside.gattmg.infos.ProjectInfos;
+import cn.gateside.gattmg.infos.TempType;
+import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
+import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
+import com.gateside.autotesting.Gat.util.GlobalConfig;
+import com.gateside.autotesting.Lib.xmlService.XMLParser;
+import com.gateside.autotesting.Lib.xmlService.XMLSerializer;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cn.gateside.gattmg.infos.DataFileType;
-import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
-import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
-import com.gateside.autotesting.Lib.xmlService.XMLParser;
-import com.gateside.autotesting.Lib.xmlService.XMLSerializer;
-import org.dom4j.Document;
-
-
-
-
-
-
-import cn.gateside.gattmg.extents.XmlExtents;
-import cn.gateside.gattmg.infos.ProjectInfos;
-import cn.gateside.gattmg.infos.TempType;
-
-import com.gateside.autotesting.Gat.util.GlobalConfig;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 public class ProjectUtil {
 	
@@ -189,7 +182,7 @@ public class ProjectUtil {
 		List<String> dataFileNames = DataFilesUtil.getWholeNames(fileType);
 		List<String> tagLists = new ArrayList<>();
 		String dataFilePath = ProjectUtil.getProjectBasePath() + GlobalConfig.getSlash()+"DataFiles"+GlobalConfig.getSlash()+"Xmls";
-		for(String eachFileName:dataFileNames){   //提取所有tags
+        for (String eachFileName : dataFileNames) {
 			if(eachFileName.endsWith("TestCase.xml")){
 				eachFileName=eachFileName.replace(DataFilesUtil.getDataFilesPath(fileType)+GlobalConfig.getSlash(),"");
 				List<StepsCase> stepsCaseList = getAllTestCase(dataFilePath + GlobalConfig.getSlash() +eachFileName);

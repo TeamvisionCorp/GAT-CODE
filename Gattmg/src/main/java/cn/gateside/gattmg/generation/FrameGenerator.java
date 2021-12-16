@@ -114,7 +114,7 @@ public class FrameGenerator {
                             }
                         }
                     } else {
-                        SimpleLogger.logInfo("第" + i + "个配置有问题，skipping");
+                        SimpleLogger.logInfo(i + "th config invalid，skipping");
                     }
                 }
             }
