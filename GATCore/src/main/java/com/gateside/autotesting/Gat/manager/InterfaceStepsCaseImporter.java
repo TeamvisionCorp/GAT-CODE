@@ -1,17 +1,14 @@
 package com.gateside.autotesting.Gat.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
+import com.gateside.autotesting.Gat.dataobject.EnumObjectManager;
 import com.gateside.autotesting.Gat.dataobject.TestObject;
 import com.gateside.autotesting.Gat.dataobject.testcase.AutoTestCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.InterfaceStepsCase;
 import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
-import com.gateside.autotesting.Gat.dataobject.EnumObjectManager;
-import com.gateside.autotesting.Gat.manager.TestObjectManagerFactory;
-import com.gateside.autotesting.Gat.util.GlobalConfig;
 import com.gateside.autotesting.Lib.common.SimpleLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class InterfaceStepsCaseImporter extends StepsCaseImporter
@@ -26,9 +23,9 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
     
     /**
      * 
-     * @param projectID  ÏîÄ¿ID
-     * @param caseType   ÓÃÀýÀàÐÍ£¬½Ó¿Ú£¬WebUI
-     * @param caseGroup  ×Ô¶¯»¯ÓÃÀý¿âID
+     * @param projectID  ï¿½ï¿½Ä¿ID
+     * @param caseType   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ó¿Ú£ï¿½WebUI
+     * @param caseGroup  ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ID
      * @throws Exception
      */
 	public InterfaceStepsCaseImporter(Integer projectID,Integer caseType,Integer caseGroup) throws Exception 
@@ -38,6 +35,13 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		this.caseType=caseType;
 		this.caseGroup = caseGroup;
 	}
+
+    public InterfaceStepsCaseImporter(Integer projectID, Integer caseType) throws Exception {
+        this.project = projectID;
+        this.projectAllCase = this.getProjectAutoCase(projectID);
+        this.caseType = caseType;
+        this.caseGroup = 0;
+    }
 	
 	@Override
 	public void doImport(String rootDir) throws Exception {
