@@ -1,32 +1,28 @@
 package com.gateside.autotesting.Gat.manager;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.client.methods.CloseableHttpResponse;
-
 import com.gateside.autotesting.Gat.dataobject.TestCaseImportApi;
 import com.gateside.autotesting.Gat.dataobject.testcase.AutoTestCase;
-import com.gateside.autotesting.Gat.dataobject.testcase.StepsCase;
 import com.gateside.autotesting.Gat.util.FileHelper;
 import com.gateside.autotesting.Gat.util.GlobalConfig;
 import com.gateside.autotesting.Lib.common.SimpleLogger;
 import com.gateside.autotesting.Lib.httpclientService.HttpClientHelper;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.http.client.methods.CloseableHttpResponse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class StepsCaseImporter extends TestObjectImporter {
 
 	@Override
 	public List<String> getFilePath(String rootDir) {
 		List<String> result=new ArrayList<String>();
-		List<String> filePathes = new ArrayList<String>();
-		FileHelper.traverseFolder(rootDir, filePathes);
-		for(String filepath:filePathes)
+        List<String> filePaths = new ArrayList<String>();
+        FileHelper.traverseFolder(rootDir, filePaths);
+        for (String filepath : filePaths)
 		{
 			if(filepath.endsWith("TestCase.xml"))
 			{
@@ -41,7 +37,7 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 	{
 		String newCaseKey=stepCase.PackageName+stepCase.ClassName+stepCase.CaseName;
 		Boolean isCaseExists=false;
-		CloseableHttpResponse response=null;
+        CloseableHttpResponse response;
 		try
 		{
 			for(AutoTestCase oldCase: projectAllCase)
@@ -57,14 +53,19 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 			SimpleLogger.logInfo(this.getClass(),stepCase.toJson());
 			if(isCaseExists)
 			{
-				response= HttpClientHelper.putJson(TestCaseImportApi.putApi+String.valueOf(stepCase.id)+"/",stepCase.toJson());
-			}
+                response = HttpClientHelper.putJson(TestCaseImportApi.putApi + stepCase.id + "/", stepCase.toJson());
+                InterfaceStepsCaseImporter.UPDATED_CASE_COUNT += 1;
+                SimpleLogger.logInfo(this.getClass(), "Updated : " + HttpClientHelper.getResponseText(response));
+
+            }
 			else
 			{
-				response=HttpClientHelper.postJson(TestCaseImportApi.postApi,stepCase.toJson());	
-			}
-			SimpleLogger.logInfo(this.getClass(),HttpClientHelper.getResponseText(response));
-			
+                response = HttpClientHelper.postJson(TestCaseImportApi.postApi, stepCase.toJson());
+                InterfaceStepsCaseImporter.NEW_CASE_COUNT += 1;
+                SimpleLogger.logInfo(this.getClass(), "Add : " + HttpClientHelper.getResponseText(response));
+
+            }
+
 			
 		} 
 		catch (Exception e) {
@@ -75,8 +76,8 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 	
 	protected List<AutoTestCase> getProjectAutoCase(Integer projectID) throws IOException, Exception
 	{
-        List<AutoTestCase> result=new ArrayList<AutoTestCase>();
-		CloseableHttpResponse response= HttpClientHelper.getJson(TestCaseImportApi.listApi+String.valueOf(projectID));
+        List<AutoTestCase> result = new ArrayList<>();
+        CloseableHttpResponse response = HttpClientHelper.getJson(TestCaseImportApi.listApi + projectID);
 		JSONObject autoCaseObject=JSONObject.fromObject(HttpClientHelper.getResponseText(response));
 		JSONArray autoCaseJsonList=autoCaseObject.getJSONObject("result").getJSONArray("results");
 		for(Integer i=0;i<autoCaseJsonList.size();i++)
@@ -90,13 +91,13 @@ public abstract class StepsCaseImporter extends TestObjectImporter {
 	
 	public String setTestCaseFilePath(String caseFilePath)
 	{
-		String result="";
+        String result;
 		Integer startIndex=caseFilePath.lastIndexOf("Xmls")+5;
 		Integer endIndex=caseFilePath.lastIndexOf(".")+1;
 		caseFilePath=caseFilePath.substring(startIndex,endIndex);
 		SimpleLogger.logInfo(this.getClass(),"create test class name");
 		SimpleLogger.logInfo(this.getClass(),"the test case filepath is:"+caseFilePath);
-		if(GlobalConfig.getSlash()=="\\")
+        if (GlobalConfig.getSlash().equals("\\"))
 		{
 			result=caseFilePath.replaceAll("\\\\","_");
 		}

@@ -19,6 +19,8 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 	private List<AutoTestCase> projectAllCase=null;
 	private Integer caseType=1;
 	private Integer caseGroup = 0;
+    public static Integer NEW_CASE_COUNT = 0;
+    public static Integer UPDATED_CASE_COUNT = 0;
 	
     
     /**
@@ -67,6 +69,10 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 			}
 			
 		}
+        SimpleLogger.logInfo(this.getClass(), "* * * * * * * * * * Import Statistics * * * * * * * * * *");
+        SimpleLogger.logInfo(this.getClass(), "NewCase Count            " + NEW_CASE_COUNT);
+        SimpleLogger.logInfo(this.getClass(), "UpdatedCase Count        " + UPDATED_CASE_COUNT);
+
 	}
 	
 
@@ -99,8 +105,5 @@ public class InterfaceStepsCaseImporter extends StepsCaseImporter
 		}
 		return result;
 	}
-	
-	
-
 
 }
